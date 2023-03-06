@@ -1,3 +1,5 @@
+const os = require('node:os');
+
 function showMaxMinFrom10Random() {
     let maxVal = Math.floor(Math.random() * 3) + 5;
     let minVal = maxVal;
@@ -13,10 +15,10 @@ function showMaxMinFrom10Random() {
 }
 
 function showMinAndMax(array) {
-    maxVal = array[0];
-    minVal = maxVal;
+    let maxVal = array[0];
+    let minVal = maxVal;
 
-    for (value in array) {
+    for (let value in array) {
         maxVal < array[value] ? maxVal = array[value] : maxVal;
         minVal > array[value] ? minVal = array[value] : minVal;
     }
@@ -31,7 +33,7 @@ function showUntil4Same(objOfInts = {}) {
     let objectKeys = Object.keys(objOfInts);
     let tempValue = Math.floor(Math.random() * 3) + 5;
     console.log("Nouveau chiffre :", tempValue);
-    for (value in objectKeys) {
+    for (let value in objectKeys) {
         let maValue = objectKeys[value]
         if (maValue == tempValue) {
             isFound = true;
@@ -64,10 +66,72 @@ function showRecursiveRandom(array = []) {
         if (!array.includes(tempValue)) {
             array.push(tempValue);
             showRecursiveRandom(array);
+        } else {
+            readPathVarsWithSplit();
         }
     }
         , 500);
     return;
+}
+
+function readPathVarsWithSplit() {
+    let data = process.env.PATH;
+    let split = data.split(";");
+    console.log("Solution avec split :");
+    for (let element in split){
+        console.log(split[element]);
+    }
+    readPathVarsWithoutSplit();
+}
+
+function readPathVarsWithoutSplit(){
+    let data = process.env.PATH;
+    console.log("Solution sans split :");
+    while (data.indexOf(";")!==-1){
+        let dataIndex = data.indexOf(";");
+        let dataLine = data.substring(0, dataIndex);
+        console.log(dataLine);
+        data = data.substring(data.indexOf(";")+1);
+    }
+    console.log(data);
+    readIPv4Addresses();
+}
+
+function readIPv4Addresses(){
+    const interfaces = os.networkInterfaces();
+
+    const nomsInterfaces = Object.keys(interfaces);
+
+    console.log("Voici les adresses IPv4 des interfaces réseaux de la machine :");
+    for (let nomInterface in nomsInterfaces){
+        const maValue = nomsInterfaces[nomInterface];
+        const monInterface = interfaces[maValue];
+        for (let numeroAdresse in monInterface){
+            if (monInterface[numeroAdresse]["family"]==="IPv4"){
+                console.log(maValue, ":", monInterface[numeroAdresse]["address"]);
+            }
+        }
+        
+    }
+
+    readIPv6Addresses()
+}
+
+function readIPv6Addresses(){
+    const interfaces = os.networkInterfaces();
+
+    const nomsInterfaces = Object.keys(interfaces);
+
+    console.log("Voici les adresses IPv6 des interfaces réseaux de la machine :");
+    for (let nomInterface in nomsInterfaces){
+        const maValue = nomsInterfaces[nomInterface];
+        const monInterface = interfaces[maValue];
+        for (let numeroAdresse in monInterface){
+            if (monInterface[numeroAdresse]["family"]==="IPv6"){
+                console.log(maValue, ":", monInterface[numeroAdresse]["address"]);
+            }
+        }
+    }
 }
 
 const arrayRandom = [
