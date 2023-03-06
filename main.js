@@ -1,9 +1,9 @@
-function showMaxMinFrom10Random(){
-    let maxVal = Math.floor(Math.random()*3)+5;
+function showMaxMinFrom10Random() {
+    let maxVal = Math.floor(Math.random() * 3) + 5;
     let minVal = maxVal;
 
-    for (let i=0; i<9; i++){
-        const tempValue = Math.floor(Math.random()*3)+5;
+    for (let i = 0; i < 9; i++) {
+        const tempValue = Math.floor(Math.random() * 3) + 5;
         tempValue > maxVal ? maxVal = tempValue : maxVal;
         tempValue < minVal ? minVal = tempValue : minVal;
     }
@@ -12,11 +12,11 @@ function showMaxMinFrom10Random(){
     return true;
 }
 
-function showMinAndMax(array){
+function showMinAndMax(array) {
     maxVal = array[0];
     minVal = maxVal;
 
-    for (value in array){
+    for (value in array) {
         maxVal < array[value] ? maxVal = array[value] : maxVal;
         minVal > array[value] ? minVal = array[value] : minVal;
     }
@@ -26,59 +26,59 @@ function showMinAndMax(array){
     return;
 }
 
-function showUntil4Same(objOfInts = {}){
+function showUntil4Same(objOfInts = {}) {
     let isFound = false;
     let objectKeys = Object.keys(objOfInts);
-    let tempValue = Math.floor(Math.random()*3)+5;
+    let tempValue = Math.floor(Math.random() * 3) + 5;
     console.log("Nouveau chiffre :", tempValue);
-    for (value in objectKeys){
+    for (value in objectKeys) {
         let maValue = objectKeys[value]
-        if (maValue == tempValue){
+        if (maValue == tempValue) {
             isFound = true;
-            objOfInts[maValue]+=1;
-            if (objOfInts[maValue]===4){
+            objOfInts[maValue] += 1;
+            if (objOfInts[maValue] === 4) {
                 return
             }
             break;
         }
     }
-    if (!isFound){
+    if (!isFound) {
         objOfInts[tempValue] = 1;
     }
     showUntil4Same(objOfInts);
 }
 
-function showRandomAfter1Second(){
-    setTimeout(() =>{
-        console.log("Nombre affiché après 1 seconde :", Math.floor(Math.random()*3)+5);
+function showRandomAfter1Second() {
+    setTimeout(() => {
+        console.log("Nombre affiché après 1 seconde :", Math.floor(Math.random() * 3) + 5);
         showRecursiveRandom();
     }
-    ,1000);
+        , 1000);
     return;
 }
 
-function showRecursiveRandom(array = []){
+function showRecursiveRandom(array = []) {
     setTimeout(() => {
-        let tempValue = Math.floor(Math.random()*3)+5
+        let tempValue = Math.floor(Math.random() * 3) + 5
         console.log("Nombre affiché après 0.5s :", tempValue);
-        if (!array.includes(tempValue)){
+        if (!array.includes(tempValue)) {
             array.push(tempValue);
             showRecursiveRandom(array);
         }
     }
-    ,500);
+        , 500);
     return;
 }
 
 const arrayRandom = [
-    Math.floor(Math.random()*3)+5,
-    Math.floor(Math.random()*3)+5,
-    Math.floor(Math.random()*3)+5,
-    Math.floor(Math.random()*3)+5,
-    Math.floor(Math.random()*3)+5
+    Math.floor(Math.random() * 3) + 5,
+    Math.floor(Math.random() * 3) + 5,
+    Math.floor(Math.random() * 3) + 5,
+    Math.floor(Math.random() * 3) + 5,
+    Math.floor(Math.random() * 3) + 5
 ];
 
-function launchEverything(){
+function launchEverything() {
     showMaxMinFrom10Random();
     showMinAndMax(arrayRandom);
     showUntil4Same();
