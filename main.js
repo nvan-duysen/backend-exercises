@@ -78,56 +78,56 @@ function readPathVarsWithSplit() {
     let data = process.env.PATH;
     let split = data.split(";");
     console.log("Solution avec split :");
-    for (let element in split){
+    for (let element in split) {
         console.log(split[element]);
     }
     readPathVarsWithoutSplit();
 }
 
-function readPathVarsWithoutSplit(){
+function readPathVarsWithoutSplit() {
     let data = process.env.PATH;
     console.log("Solution sans split :");
-    while (data.indexOf(";")!==-1){
+    while (data.indexOf(";") !== -1) {
         let dataIndex = data.indexOf(";");
         let dataLine = data.substring(0, dataIndex);
         console.log(dataLine);
-        data = data.substring(data.indexOf(";")+1);
+        data = data.substring(data.indexOf(";") + 1);
     }
     console.log(data);
     readIPv4Addresses();
 }
 
-function readIPv4Addresses(){
+function readIPv4Addresses() {
     const interfaces = os.networkInterfaces();
 
     const nomsInterfaces = Object.keys(interfaces);
 
     console.log("Voici les adresses IPv4 des interfaces réseaux de la machine :");
-    for (let nomInterface in nomsInterfaces){
+    for (let nomInterface in nomsInterfaces) {
         const maValue = nomsInterfaces[nomInterface];
         const monInterface = interfaces[maValue];
-        for (let numeroAdresse in monInterface){
-            if (monInterface[numeroAdresse]["family"]==="IPv4"){
+        for (let numeroAdresse in monInterface) {
+            if (monInterface[numeroAdresse]["family"] === "IPv4") {
                 console.log(maValue, ":", monInterface[numeroAdresse]["address"]);
             }
         }
-        
+
     }
 
     readIPv6Addresses()
 }
 
-function readIPv6Addresses(){
+function readIPv6Addresses() {
     const interfaces = os.networkInterfaces();
 
     const nomsInterfaces = Object.keys(interfaces);
 
     console.log("Voici les adresses IPv6 des interfaces réseaux de la machine :");
-    for (let nomInterface in nomsInterfaces){
+    for (let nomInterface in nomsInterfaces) {
         const maValue = nomsInterfaces[nomInterface];
         const monInterface = interfaces[maValue];
-        for (let numeroAdresse in monInterface){
-            if (monInterface[numeroAdresse]["family"]==="IPv6"){
+        for (let numeroAdresse in monInterface) {
+            if (monInterface[numeroAdresse]["family"] === "IPv6") {
                 console.log(maValue, ":", monInterface[numeroAdresse]["address"]);
             }
         }
